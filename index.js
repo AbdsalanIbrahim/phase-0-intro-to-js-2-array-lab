@@ -1,13 +1,12 @@
-const cats = ["Milo", "Otis", "Garfield"];
+let cats = ["Milo", "Otis", "Garfield"];
 
-function destructivelyAppendCat(name) {
+function destructivelyAddCat(name) {
     cats.push(name);
     return cats;
 }
 
-function destructivelyPrependCat(name) {
-    cats.unshift(name);
-    return cats;
+function addCat(name) {
+    return [...cats, name];
 }
 
 function destructivelyRemoveLastCat() {
@@ -15,24 +14,35 @@ function destructivelyRemoveLastCat() {
     return cats;
 }
 
+function removeLastCat() {
+    return cats.slice(0, -1);
+}
+
+function destructivelyAddCatAtBeginning(name) {
+    cats.unshift(name);
+    return cats;
+}
+
+function addCatAtBeginning(name) {
+    return [name, ...cats];
+}
+
 function destructivelyRemoveFirstCat() {
     cats.shift();
     return cats;
 }
 
-function appendCat(name) {
-    return [...cats, name]; 
-}
-
-function prependCat(name) {
-    return [name, ...cats]; 
-}
-
-function removeLastCat() {
-    return cats.slice(0, -1); 
-}
-
 function removeFirstCat() {
-    return cats.slice(1); 
+    return cats.slice(1);
 }
 
+// Testing the functions
+console.log("Initial cats:", cats);
+console.log("Add a cat destructively:", destructivelyAddCat("Whiskers"));
+console.log("Add a cat nondestructively:", addCat("Simba"));
+console.log("Remove last cat destructively:", destructivelyRemoveLastCat());
+console.log("Remove last cat nondestructively:", removeLastCat());
+console.log("Add a cat at beginning destructively:", destructivelyAddCatAtBeginning("Bella"));
+console.log("Add a cat at beginning nondestructively:", addCatAtBeginning("Leo"));
+console.log("Remove first cat destructively:", destructivelyRemoveFirstCat());
+console.log("Remove first cat nondestructively:", removeFirstCat());
