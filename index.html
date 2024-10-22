@@ -24,6 +24,23 @@
 
     <script src="index.js"></script> 
     <script>
+        let cats = ["Milo", "Otis", "Garfield"];
+
+        function destructivelyAppendCat(name) {
+            cats.push(name);
+            return cats;
+        }
+
+        function destructivelyRemoveLastCat() {
+            cats.pop();
+            return cats;
+        }
+
+        function destructivelyRemoveFirstCat() {
+            cats.shift();
+            return cats;
+        }
+
         function updateCatsList() {
             const catsList = document.getElementById('cats-list');
             catsList.innerHTML = ''; 
@@ -54,7 +71,7 @@
             updateCatsList();
         });
 
-        updateCatsList();
+        updateCatsList(); 
     </script>
 </body>
 </html>

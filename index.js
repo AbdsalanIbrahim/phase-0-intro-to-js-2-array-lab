@@ -1,47 +1,48 @@
 let cats = ["Milo", "Otis", "Garfield"];
 
-function destructivelyAddCat(name) {
-    cats.push(name);
+function destructivelyAppendCat(name) {
+    cats.push(name); 
     return cats;
-}
-
-function addCat(name) {
-    return [...cats, name];
 }
 
 function destructivelyRemoveLastCat() {
-    cats.pop();
+    cats.pop(); 
     return cats;
-}
-
-function removeLastCat() {
-    return cats.slice(0, -1);
-}
-
-function destructivelyAddCatAtBeginning(name) {
-    cats.unshift(name);
-    return cats;
-}
-
-function addCatAtBeginning(name) {
-    return [name, ...cats];
 }
 
 function destructivelyRemoveFirstCat() {
-    cats.shift();
+    cats.shift(); 
     return cats;
 }
 
-function removeFirstCat() {
-    return cats.slice(1);
+function updateCatsList() {
+    const catsList = document.getElementById('cats-list');
+    catsList.innerHTML = ''; 
+    cats.forEach(cat => {
+        const li = document.createElement('li');
+        li.textContent = cat; 
+        catsList.appendChild(li); 
+    });
 }
 
-console.log("Initial cats:", cats);
-console.log("Add a cat destructively:", destructivelyAddCat("Whiskers"));
-console.log("Add a cat nondestructively:", addCat("Simba"));
-console.log("Remove last cat destructively:", destructivelyRemoveLastCat());
-console.log("Remove last cat nondestructively:", removeLastCat());
-console.log("Add a cat at beginning destructively:", destructivelyAddCatAtBeginning("Bella"));
-console.log("Add a cat at beginning nondestructively:", addCatAtBeginning("Leo"));
-console.log("Remove first cat destructively:", destructivelyRemoveFirstCat());
-console.log("Remove first cat nondestructively:", removeFirstCat());
+document.getElementById('add-cat-btn').addEventListener('click', () => {
+    const catNameInput = document.getElementById('cat-name');
+    const catName = catNameInput.value.trim();
+    if (catName) {
+        destructivelyAppendCat(catName); 
+        updateCatsList(); 
+        catNameInput.value = ''; 
+    }
+});
+
+document.getElementById('remove-last-cat-btn').addEventListener('click', () => {
+    destructivelyRemoveLastCat(); 
+    updateCatsList(); 
+});
+
+document.getElementById('remove-first-cat-btn').addEventListener('click', () => {
+    destructivelyRemoveFirstCat(); 
+    updateCatsList(); 
+});
+
+updateCatsList();
