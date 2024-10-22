@@ -4,74 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cats Array Manipulation</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Cats Array Manipulation Lab</h1>
-    
-    <div id="cats-container">
-        <h2>Current Cats:</h2>
-        <ul id="cats-list"></ul>
+    <div class="container">
+        <h1>Cats Array Manipulation</h1>
+        
+        <div id="cat-list">
+            <h2>Current Cats:</h2>
+            <ul id="cats-ul">
+            </ul>
+        </div>
+
+        <div class="controls">
+            <h3>Add a Cat</h3>
+            <input type="text" id="new-cat-name" placeholder="Enter cat name" required>
+            <button id="append-cat">Add to End</button>
+            <button id="prepend-cat">Add to Beginning</button>
+        </div>
+
+        <div class="controls">
+            <h3>Remove a Cat</h3>
+            <button id="remove-last-cat">Remove Last Cat</button>
+            <button id="remove-first-cat">Remove First Cat</button>
+        </div>
     </div>
 
-    <div id="input-container">
-        <h2>Add a Cat</h2>
-        <input type="text" id="cat-name" placeholder="Enter cat name">
-        <button id="add-cat-btn">Add Cat</button>
-        <button id="remove-last-cat-btn">Remove Last Cat</button>
-        <button id="remove-first-cat-btn">Remove First Cat</button>
-    </div>
-
-    <script src="index.js"></script> 
-    <script>
-        let cats = ["Milo", "Otis", "Garfield"];
-
-        function destructivelyAppendCat(name) {
-            cats.push(name);
-            return cats;
-        }
-
-        function destructivelyRemoveLastCat() {
-            cats.pop();
-            return cats;
-        }
-
-        function destructivelyRemoveFirstCat() {
-            cats.shift();
-            return cats;
-        }
-
-        function updateCatsList() {
-            const catsList = document.getElementById('cats-list');
-            catsList.innerHTML = ''; 
-            cats.forEach(cat => {
-                const li = document.createElement('li');
-                li.textContent = cat;
-                catsList.appendChild(li);
-            });
-        }
-
-        document.getElementById('add-cat-btn').addEventListener('click', () => {
-            const catNameInput = document.getElementById('cat-name');
-            const catName = catNameInput.value.trim();
-            if (catName) {
-                destructivelyAppendCat(catName);
-                updateCatsList();
-                catNameInput.value = ''; 
-            }
-        });
-
-        document.getElementById('remove-last-cat-btn').addEventListener('click', () => {
-            destructivelyRemoveLastCat();
-            updateCatsList();
-        });
-
-        document.getElementById('remove-first-cat-btn').addEventListener('click', () => {
-            destructivelyRemoveFirstCat();
-            updateCatsList();
-        });
-
-        updateCatsList(); 
-    </script>
+    <script src="index.js" defer></script>
 </body>
 </html>

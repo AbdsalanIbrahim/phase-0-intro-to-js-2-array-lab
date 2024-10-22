@@ -1,48 +1,61 @@
 let cats = ["Milo", "Otis", "Garfield"];
 
+function renderCats() {
+    const catsUl = document.getElementById('cats-ul');
+    catsUl.innerHTML = ''; 
+    cats.forEach(cat => {
+        const li = document.createElement('li');
+        li.textContent = cat;
+        catsUl.appendChild(li);
+    });
+}
+
 function destructivelyAppendCat(name) {
     cats.push(name); 
-    return cats;
+}
+
+function destructivelyPrependCat(name) {
+    cats.unshift(name); 
 }
 
 function destructivelyRemoveLastCat() {
     cats.pop(); 
-    return cats;
 }
 
 function destructivelyRemoveFirstCat() {
     cats.shift(); 
-    return cats;
 }
 
-function updateCatsList() {
-    const catsList = document.getElementById('cats-list');
-    catsList.innerHTML = ''; 
-    cats.forEach(cat => {
-        const li = document.createElement('li');
-        li.textContent = cat; 
-        catsList.appendChild(li); 
-    });
-}
-
-document.getElementById('add-cat-btn').addEventListener('click', () => {
-    const catNameInput = document.getElementById('cat-name');
-    const catName = catNameInput.value.trim();
+document.getElementById('append-cat').addEventListener('click', () => {
+    const catName = document.getElementById('new-cat-name').value.trim();
     if (catName) {
-        destructivelyAppendCat(catName); 
-        updateCatsList(); 
-        catNameInput.value = ''; 
+        destructivelyAppendCat(catName);
+        renderCats();
+        document.getElementById('new-cat-name').value = ''; 
+    } else {
+        alert("Please enter a cat name.");
     }
 });
 
-document.getElementById('remove-last-cat-btn').addEventListener('click', () => {
-    destructivelyRemoveLastCat(); 
-    updateCatsList(); 
+document.getElementById('prepend-cat').addEventListener('click', () => {
+    const catName = document.getElementById('new-cat-name').value.trim();
+    if (catName) {
+        destructivelyPrependCat(catName);
+        renderCats();
+        document.getElementById('new-cat-name').value = ''; 
+    } else {
+        alert("Please enter a cat name.");
+    }
 });
 
-document.getElementById('remove-first-cat-btn').addEventListener('click', () => {
-    destructivelyRemoveFirstCat(); 
-    updateCatsList(); 
+document.getElementById('remove-last-cat').addEventListener('click', () => {
+    destructivelyRemoveLastCat();
+    renderCats();
 });
 
-updateCatsList();
+document.getElementById('remove-first-cat').addEventListener('click', () => {
+    destructivelyRemoveFirstCat();
+    renderCats();
+});
+
+renderCats();
