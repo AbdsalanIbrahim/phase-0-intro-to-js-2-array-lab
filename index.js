@@ -1,48 +1,61 @@
 let cats = ["Milo", "Otis", "Garfield"];
 
-function destructivelyAddCat(name) {
-    cats.push(name);
-    return cats;
+function renderCats() {
+    const catsUl = document.getElementById('cats-ul');
+    catsUl.innerHTML = ''; 
+    cats.forEach(cat => {
+        const li = document.createElement('li');
+        li.textContent = cat;
+        catsUl.appendChild(li);
+    });
 }
 
-function addCat(name) {
-    return [...cats, name];
+function destructivelyAppendCat(name) {
+    cats.push(name); 
+}
+
+function destructivelyPrependCat(name) {
+    cats.unshift(name); 
 }
 
 function destructivelyRemoveLastCat() {
-    cats.pop();
-    return cats;
-}
-
-function removeLastCat() {
-    return cats.slice(0, -1);
-}
-
-function destructivelyAddCatAtBeginning(name) {
-    cats.unshift(name);
-    return cats;
-}
-
-function addCatAtBeginning(name) {
-    return [name, ...cats];
+    cats.pop(); 
 }
 
 function destructivelyRemoveFirstCat() {
-    cats.shift();
-    return cats;
+    cats.shift(); 
 }
 
-function removeFirstCat() {
-    return cats.slice(1);
-}
+document.getElementById('append-cat').addEventListener('click', () => {
+    const catName = document.getElementById('new-cat-name').value.trim();
+    if (catName) {
+        destructivelyAppendCat(catName);
+        renderCats();
+        document.getElementById('new-cat-name').value = ''; 
+    } else {
+        alert("Please enter a cat name.");
+    }
+});
 
-// Testing the functions
-console.log("Initial cats:", cats);
-console.log("Add a cat destructively:", destructivelyAddCat("Whiskers"));
-console.log("Add a cat nondestructively:", addCat("Simba"));
-console.log("Remove last cat destructively:", destructivelyRemoveLastCat());
-console.log("Remove last cat nondestructively:", removeLastCat());
-console.log("Add a cat at beginning destructively:", destructivelyAddCatAtBeginning("Bella"));
-console.log("Add a cat at beginning nondestructively:", addCatAtBeginning("Leo"));
-console.log("Remove first cat destructively:", destructivelyRemoveFirstCat());
-console.log("Remove first cat nondestructively:", removeFirstCat());
+document.getElementById('prepend-cat').addEventListener('click', () => {
+    const catName = document.getElementById('new-cat-name').value.trim();
+    if (catName) {
+        destructivelyPrependCat(catName);
+        renderCats();
+        document.getElementById('new-cat-name').value = ''; 
+    } else {
+        alert("Please enter a cat name.");
+    }
+});
+
+document.getElementById('remove-last-cat').addEventListener('click', () => {
+    destructivelyRemoveLastCat();
+    renderCats();
+});
+
+document.getElementById('remove-first-cat').addEventListener('click', () => {
+    destructivelyRemoveFirstCat();
+    renderCats();
+});
+
+renderCats();
